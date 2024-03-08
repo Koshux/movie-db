@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { fetchMovies } from '../services/movieService'
 import Search from './Search'
+import GenreFilter from './GenreFilter'
 
 export interface Movie {
   id: number,
@@ -14,6 +15,16 @@ export interface Movie {
 const Movies = () => {
   const [movies, setMovies] = useState([])
   const [query, setQuery] = useState('')
+  const [selectedGenre, setSelectedGenre] = useState<string>('')
+
+  useEffect(() => {
+    const loadMovies = async () => {
+      const fetchedMovies = await fetchMovies(selectedGenre)
+      setMovies(fetchedMovies)
+    }
+
+    loadMovies()
+  }, [selectedGenre])
 
   useEffect(() => {
     const loadMovies = async () => {
@@ -28,6 +39,7 @@ const Movies = () => {
     <div>
       <h1>Movies</h1>
       <Search onSearch={setQuery} />
+      <GenreFilter onGenreSelect={setSelectedGenre} />
 
       <ul>
         {movies.map((movie: Movie)  => (

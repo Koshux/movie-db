@@ -4,8 +4,18 @@ import { Op } from "sequelize"
 import MovieSerializer from "../serializers/movieSerializer"
 
 export const listMovies = async (req: Request, res: Response) => {
+  const { genre } = req.query
+
   try {
-    const movies = await Movie.findAll()
+    const queryOptions = genre ? {
+      where: {
+        genre: {
+          [Op.iLike]: `%${genre}%`
+        }
+      }
+    } : {}
+
+    const movies = await Movie.findAll(queryOptions)
 
     res.json(MovieSerializer.serialize(movies))
   } catch (err: any) {
@@ -27,7 +37,7 @@ export const searchMovie = async (req: Request, res: Response) => {
         title: {
           [Op.iLike]: `%${title}%`
         }
-      } : undefined
+      } : {}
     })
 
     res.json(MovieSerializer.serialize(movies))
