@@ -26,7 +26,9 @@ const GenreFilter: React.FC<Props> = ({ onGenreSelect }) => {
 
   return (
     <select onChange={(e) => onGenreSelect(e.target.value)} defaultValue="">
-      <option value="">All genres</option>
+      <option value="all">All genres</option>
+      <option value="a">a</option>
+      <option value="b">b</option>
       {genres.map((genre: Genre) => (
         <option key={genre.id} value={genre.id}>{genre.attributes.name}</option>
       ))}

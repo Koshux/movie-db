@@ -17,6 +17,18 @@ const Movies = () => {
   const [query, setQuery] = useState('')
   const [selectedGenre, setSelectedGenre] = useState<string>('')
 
+  // fetch the movies when the genre and the query changes together as well as separate
+  useEffect(() => {
+    const loadMovies = async () => {
+      const fetchedMovies = await fetchMovies(selectedGenre, query)
+      setMovies(fetchedMovies)
+    }
+
+    loadMovies()
+  }, [selectedGenre, query])
+
+
+
   useEffect(() => {
     const loadMovies = async () => {
       const fetchedMovies = await fetchMovies(selectedGenre)

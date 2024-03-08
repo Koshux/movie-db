@@ -3,8 +3,17 @@ import { Movie } from "../components/Movies"
 
 const API_URL = 'http://localhost:4000/api/movies'
 
-export const fetchMovies = async (query?: string) => {
-  const url = query ? `${API_URL}/search?title=${query}` : API_URL
+export const fetchMovies = async (genre?: string, query?: string) => {
+  let url
+  if (query && genre) {
+    url = `${API_URL}/search?title=${query}&genre=${genre}`
+  } else if (query) {
+    url = `${API_URL}/search?title=${query}`
+  } else if (genre) {
+    url = `${API_URL}?genre=${genre}`
+  } else {
+    url = API_URL
+  }
 
   try {
     const response = await axios.get(url)
