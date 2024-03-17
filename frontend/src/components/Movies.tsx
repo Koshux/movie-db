@@ -1,43 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { fetchMovies } from '../services/movieService'
+import React, { useState } from 'react'
+// import { fetchMovies } from '../services/movieService'
 import Search from './Search'
 import GenreFilter from './GenreFilter'
 import { Movie } from '../types'
+import { useGetMoviesQuery } from '../features/movies/moviesApi'
 
 const Movies = () => {
-  const [movies, setMovies] = useState([])
+  // const [movies, setMovies] = useState([])
   const [query, setQuery] = useState('')
   const [selectedGenre, setSelectedGenre] = useState<string>('')
+  const searchCriteria = `${selectedGenre},${query}`
+  const { data: movies, error, isLoading } = useGetMoviesQuery(searchCriteria)
 
-  // fetch the movies when the genre and the query changes together as well as separate
-  useEffect(() => {
-    const loadMovies = async () => {
-      const fetchedMovies = await fetchMovies(selectedGenre, query)
-      setMovies(fetchedMovies)
-    }
-
-    loadMovies()
-  }, [selectedGenre, query])
-
-
-
-  useEffect(() => {
-    const loadMovies = async () => {
-      const fetchedMovies = await fetchMovies(selectedGenre)
-      setMovies(fetchedMovies)
-    }
-
-    loadMovies()
-  }, [selectedGenre])
-
-  useEffect(() => {
-    const loadMovies = async () => {
-      const fetchedMovies = await fetchMovies(query)
-      setMovies(fetchedMovies)
-    }
-
-    loadMovies()
-  }, [query])
+  if (isLoading) return <div>Loading...</div>
+  if (error) return <div>Error: {error.toString()}</div>
 
   return (
     <div>
@@ -46,7 +22,7 @@ const Movies = () => {
       <GenreFilter onGenreSelect={setSelectedGenre} />
 
       <ul>
-        {movies.map((movie: Movie)  => (
+        {movies?.map((movie: Movie)  => (
           <li key={movie.id}>
             {movie.attributes.title} - {movie.attributes.year}
           </li>
