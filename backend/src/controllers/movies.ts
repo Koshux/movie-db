@@ -18,6 +18,8 @@ export const listMovies = async (req: Request, res: Response) => {
       }
     } : {}
 
+    console.log('queryOptions', queryOptions)
+
     const movies = await Movie.findAll(queryOptions)
 
     res.json(MovieSerializer.serialize(movies))

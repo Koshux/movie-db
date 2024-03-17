@@ -8,7 +8,7 @@ export const moviesApi = createApi({
   }),
   endpoints: (builder) => ({
     getMovies: builder.query<Movie[], string | void>({
-      query: (genre) => genre ? `/movies?genre=${genre}` : '/movies',
+      query: (genre) => '/movies',
     }),
     getGenres: builder.query<Genre[], void>({
       query: () => '/movies/genres'
