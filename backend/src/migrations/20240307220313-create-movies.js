@@ -31,6 +31,6 @@ module.exports = {
   },
 
   async down (queryInterface) {
-    await queryInterface.dropTable('Movies');
+    await queryInterface.dropTable('Movies')
   }
-};
+}

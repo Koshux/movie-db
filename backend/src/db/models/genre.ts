@@ -1,20 +1,18 @@
 import { DataTypes, Model } from 'sequelize'
 import sequelize from '../index'
 
-class Movie extends Model {}
+class Genre extends Model {}
 
-Movie.init({
+Genre.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  title: DataTypes.STRING,
-  genre: DataTypes.STRING,
-  year: DataTypes.INTEGER
+  name: DataTypes.STRING
 }, {
   sequelize,
-  modelName: 'Movie'
+  modelName: 'Genre'
 })
 
-export default Movie
+export default Genre
