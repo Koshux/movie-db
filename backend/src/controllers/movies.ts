@@ -1,17 +1,19 @@
-import { Request, Response } from "express"
+import { Request, Response } from 'express'
+import { ParsedQs } from 'qs'
 import Movie from '../db/models/movie'
-import { Op } from "sequelize"
-import MovieSerializer from "../serializers/movieSerializer"
-import Genre from "../db/models/genre"
+import { Op } from 'sequelize'
+import MovieSerializer from '../serializers/movieSerializer'
+import Genre from '../db/models/genre'
 
 export const listMovies = async (req: Request, res: Response) => {
   const { genre } = req.query
 
+  debugger
   try {
     const queryOptions = genre ? {
       where: {
         genre: {
-          [Op.iLike]: `%${genre}%`
+          [Op.like]: `%${genre}%`
         }
       }
     } : {}
@@ -36,7 +38,7 @@ export const searchMovie = async (req: Request, res: Response) => {
     const movies = await Movie.findAll({
       where: title ? {
         title: {
-          [Op.iLike]: `%${title}%`
+          [Op.like]: `%${title}%`
         }
       } : {}
     })
@@ -54,15 +56,10 @@ export const searchMovie = async (req: Request, res: Response) => {
 
 export const searchGenre = async (req: Request, res: Response) => {
   try {
+    const genreFilter = (req.query.filter as ParsedQs).genre
     // const genres = await Movie.aggregate('genre', 'DISTINCT', { plain: false })
-    // I need to use sequelize to filter genres by the request query parameter using JSON:API filter spec. If there's no filter, I should return all genres.
-    const genres = await Genre.findAll({
-      where: req.query.genre ? {
-        genre: {
-          [Op.iLike]: `%${req.query.genre}%`
-        }
-      } : {}
-    })
+    const filter = genreFilter ? { where : { genre: { [Op.like]: `%${genreFilter}%` } } } : {}
+    const genres = await Genre.findAll(filter)
     // const genres = await Genre.findAll({
     //   attributes: ['genre'],
     //   group: ['genre']
