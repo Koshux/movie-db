@@ -1,5 +1,5 @@
-import axios from "axios"
-import { Movie } from "../components/Movies"
+import axios from 'axios'
+import { Movie } from '../types'
 
 const API_URL = 'http://localhost:4000/api/movies'
 

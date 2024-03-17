@@ -12,7 +12,7 @@ function App() {
         </header>
       </div>
     </GenreProvider>
-  );
+  )
 }
 
 export default App

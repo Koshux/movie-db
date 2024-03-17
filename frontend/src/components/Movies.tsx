@@ -2,15 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchMovies } from '../services/movieService'
 import Search from './Search'
 import GenreFilter from './GenreFilter'
-
-export interface Movie {
-  id: number,
-  attributes: {
-    title: string,
-    genre: string,
-    year: string
-  }
-}
+import { Movie } from '../types'
 
 const Movies = () => {
   const [movies, setMovies] = useState([])
