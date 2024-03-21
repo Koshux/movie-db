@@ -7,7 +7,7 @@ import {
   Table
 } from 'sequelize-typescript'
 
-@Table
+@Table({ tableName: 'Movies' })
 class Movie extends Model {
   @PrimaryKey
   @AutoIncrement

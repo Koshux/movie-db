@@ -1,6 +1,6 @@
 import { AutoIncrement, Column, DataType, Model, PrimaryKey, Table } from 'sequelize-typescript'
 
-@Table
+@Table({ tableName: 'Genres' })
 class Genre extends Model {
   @PrimaryKey
   @AutoIncrement
