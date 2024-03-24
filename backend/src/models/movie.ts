@@ -2,10 +2,12 @@ import {
   AutoIncrement,
   Column,
   DataType,
+  HasMany,
   Model,
   PrimaryKey,
   Table
 } from 'sequelize-typescript'
+import Genre from './genre'
 
 @Table({ tableName: 'Movies' })
 class Movie extends Model {
@@ -22,6 +24,9 @@ class Movie extends Model {
 
   @Column(DataType.INTEGER)
   year: number
+
+  @HasMany(() => Genre)
+  genres: Genre[]
 }
 
 export default Movie

@@ -4,7 +4,7 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     console.log('yay')
-    await queryInterface.createTable('genres', {
+    await queryInterface.createTable('Genres', {
       id: {
         primaryKey: true,
         autoIncrement: true,
@@ -24,12 +24,12 @@ module.exports = {
       }
     })
 
-    await queryInterface.addIndex('genres', ['name'], {
+    await queryInterface.addIndex('Genres', ['name'], {
       unique: true
     })
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('genres')
+    await queryInterface.dropTable('Genres')
   }
 };
