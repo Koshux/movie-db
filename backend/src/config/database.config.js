@@ -1,7 +1,10 @@
+const dotenv = require('dotenv')
+dotenv.config()
+
 module.exports = {
   "development": {
     "dialect": "sqlite",
-    "storage": "../movies.sqlite",
+    "storage": process.env.DB_PATH,
     logging: console.log
   },
   "test": {
