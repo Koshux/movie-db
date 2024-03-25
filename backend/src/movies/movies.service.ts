@@ -18,18 +18,15 @@ export class MoviesService {
     return this.moviesRepository.findAll(genre)
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: number) {
+  findOne(id: number): Promise<Movie> {
     return this.moviesRepository.findOne(id)
   }
 
-  @Patch(':id')
-  update(@Param('id') id: number, @Body() updateMovieDto: UpdateMovieDto) {
+  update(id: number, updateMovieDto: UpdateMovieDto) {
     return this.moviesRepository.update(+id, updateMovieDto)
   }
 
-  @Delete(':id')
-  remove(@Param(':id') id: number) {
+  remove(id: number) {
     return this.moviesRepository.remove(+id)
   }
 }

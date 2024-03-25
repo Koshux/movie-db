@@ -1,7 +1,9 @@
 import {
   AutoIncrement,
+  BelongsTo,
   Column,
   DataType,
+  ForeignKey,
   HasMany,
   Model,
   PrimaryKey,
@@ -19,14 +21,15 @@ class Movie extends Model {
   @Column(DataType.STRING)
   title: string
 
-  @Column(DataType.STRING)
-  genre: string
-
   @Column(DataType.INTEGER)
   year: number
 
-  @HasMany(() => Genre)
-  genres: Genre[]
+  @ForeignKey(() => Genre)
+  @Column(DataType.INTEGER)
+  genreId: number
+
+  @BelongsTo(() => Genre)
+  genre: Genre
 }
 
 export default Movie

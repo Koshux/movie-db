@@ -5,16 +5,16 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Movies', [{
       title: 'The Matrix',
-      genre: 'Action',
       year: 1999,
+      genreId: 1,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     }, {
       title: 'Inception',
-      genre: 'Science Fiction',
       year: 2010,
+      genreId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     }], {})
   },
 

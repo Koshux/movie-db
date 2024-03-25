@@ -14,9 +14,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      genre: {
+      genreId: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Genres',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       year: {
         allowNull: false,

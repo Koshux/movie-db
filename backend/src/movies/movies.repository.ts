@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Delete, Get, Injectable, Patch, Post } from "@nestjs/common";
 import Movie from "src/models/movie";
 import { CreateMovieDto } from "./dto/create-movie.dto";
 import { UpdateMovieDto } from "./dto/update-movie.dto";
