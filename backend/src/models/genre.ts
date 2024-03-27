@@ -1,11 +1,24 @@
-import { AutoIncrement, BelongsTo, Column, DataType, ForeignKey, HasMany, Model, PrimaryKey, Table } from 'sequelize-typescript'
+import {
+  AutoIncrement,
+  BelongsToMany,
+  Column,
+  DataType,
+  Model,
+  PrimaryKey,
+  Table
+} from 'sequelize-typescript'
 import Movie from './movie'
+import { MovieGenre } from './movie-genre'
 
 @Table({ tableName: 'Genres' })
 export default class Genre extends Model<Genre> {
   @PrimaryKey
   @AutoIncrement
-  @Column(DataType.INTEGER)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+  })
   id: number
 
   @Column({
@@ -14,6 +27,6 @@ export default class Genre extends Model<Genre> {
   })
   name: string
 
-  @HasMany(() => Movie)
+  @BelongsToMany(() => Movie, () => MovieGenre)
   movies: Movie[]
 }

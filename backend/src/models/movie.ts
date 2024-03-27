@@ -1,35 +1,64 @@
 import {
   AutoIncrement,
-  BelongsTo,
+  BelongsToMany,
   Column,
   DataType,
-  ForeignKey,
-  HasMany,
   Model,
   PrimaryKey,
   Table
 } from 'sequelize-typescript'
 import Genre from './genre'
+import { MovieGenre } from './movie-genre'
 
 @Table({ tableName: 'Movies' })
 class Movie extends Model {
   @PrimaryKey
   @AutoIncrement
-  @Column(DataType.INTEGER)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+  })
   id: number
+
+  @Column(DataType.BOOLEAN)
+  adult: boolean
+
+  @Column(DataType.STRING)
+  backdrop_path: string
+
+  @Column(DataType.STRING)
+  original_language: string
+
+  @Column(DataType.STRING)
+  original_title: string
+
+  @Column(DataType.TEXT)
+  overview: string
+
+  @Column(DataType.FLOAT)
+  popularity: number
+
+  @Column(DataType.STRING)
+  poster_path: string
+
+  @Column(DataType.DATEONLY)
+  release_date: string
 
   @Column(DataType.STRING)
   title: string
 
-  @Column(DataType.INTEGER)
-  year: number
+  @Column(DataType.BOOLEAN)
+  video: boolean
 
-  @ForeignKey(() => Genre)
-  @Column(DataType.INTEGER)
-  genreId: number
+  @Column(DataType.FLOAT)
+  vote_average: number
 
-  @BelongsTo(() => Genre)
-  genre: Genre
+  @Column(DataType.INTEGER)
+  vote_count: number
+
+  @BelongsToMany(() => Genre, () => MovieGenre)
+  genres: Genre[]
 }
 
 export default Movie
