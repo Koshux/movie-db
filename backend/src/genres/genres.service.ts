@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { CreateGenreDto } from './dto/create-genre.dto'
 import { UpdateGenreDto } from './dto/update-genre.dto'
 import { GenresRepository } from './genres.repository'
-import Genre from 'src/models/genre'
+import Genre from 'src/models/genre.model'
 
 @Injectable()
 export class GenresService {

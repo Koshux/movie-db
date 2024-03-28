@@ -1,8 +1,9 @@
-import { Delete, Get, Injectable, Patch, Post } from "@nestjs/common";
-import Movie from "src/models/movie";
+import { Injectable } from "@nestjs/common";
+import Movie from "src/models/movie.model";
 import { CreateMovieDto } from "./dto/create-movie.dto";
 import { UpdateMovieDto } from "./dto/update-movie.dto";
 import { InjectModel } from "@nestjs/sequelize";
+import { SequelizeOptions } from "src/common/sequlize-query.util";
 
 @Injectable()
 export class MoviesRepository {
@@ -15,9 +16,7 @@ export class MoviesRepository {
     return this.movieModel.create(createMovieDto as any)
   }
 
-  async findAll(genre?: string): Promise<Movie[]> {
-    let options = genre ? { where: { genre } } : {}
-
+  async findAll(options: SequelizeOptions): Promise<Movie[]> {
     return this.movieModel.findAll(options)
   }
 

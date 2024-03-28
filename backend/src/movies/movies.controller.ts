@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { MoviesService } from './movies.service'
 import { CreateMovieDto } from './dto/create-movie.dto'
 import { UpdateMovieDto } from './dto/update-movie.dto'
-import { QueryOptions } from 'sequelize'
 
 @Controller('movies')
 export class MoviesController {
@@ -14,8 +13,20 @@ export class MoviesController {
   }
 
   @Get()
-  findAll(@Query('genre') query: string) {
-    return this.moviesService.findAll(query)
+  findAll(
+    @Query('page') page: string,
+    @Query('limit') limit: string,
+    @Query('filter') filter: string,
+    @Query('sort') sort: string,
+    @Query('include') include: string,
+  ) {
+    return this.moviesService.findAll({
+      page,
+      limit,
+      filter,
+      sort,
+      include,
+    })
   }
 
   @Get(':id')

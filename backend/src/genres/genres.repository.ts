@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-import Genre from "src/models/genre";
+import Genre from "src/models/genre.model";
 import { CreateGenreDto } from "./dto/create-genre.dto";
 import { UpdateGenreDto } from "./dto/update-genre.dto";
 

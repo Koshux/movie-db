@@ -7,8 +7,8 @@ import {
   PrimaryKey,
   Table
 } from 'sequelize-typescript'
-import Genre from './genre'
-import { MovieGenre } from './movie-genre'
+import Genre from './genre.model'
+import { MovieGenre } from './movie-genre.model'
 
 @Table({ tableName: 'Movies' })
 class Movie extends Model {
