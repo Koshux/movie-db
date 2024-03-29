@@ -1,17 +1,23 @@
-import { Badge, Box, Image, Text } from "@chakra-ui/react"
+import { Badge, Box, Image, Text, useColorModeValue } from "@chakra-ui/react"
 import { Movie } from "../types"
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
+  const bgColor = useColorModeValue('white', 'gray.800');
+  const textColor = useColorModeValue('gray.700', 'white');
+
   return (
     <Box
-      bg="gray.700"
-      borderRadius="md"
-      boxShadow="md"
-      p={3}
-      w="200px"
+      p="5"
+      maxW="320px"
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      bg={bgColor}
+      color={textColor}
+      boxShadow="lg"
     >
       <Image
-        // src={movie.poster}
+        src={movie.poster_path}
         alt={`Poster of ${movie.title}`}
         borderRadius="md"
         // h="200px"
