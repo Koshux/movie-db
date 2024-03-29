@@ -7,18 +7,7 @@ interface Props {
 }
 
 const GenreFilter: React.FC<Props> = ({ onGenreSelect }) => {
-  // const [genres, setGenres] = useState([])
-
-  // useEffect(() => {
-  //   const fetchGenres = async () => {
-  //     const response = await axios.get('http://localhost:4000/api/genres')
-  //     setGenres(response.data.data)
-  //   }
-
-  //   fetchGenres()
-  // }, [])
   const [query, setQuery] = useState('')
-  // const [genres, setGenres] = useState<Genre[]>([])
   const searchCriteria = `${query}`
   const { data: genres, error, isLoading } = useGetGenresQuery(searchCriteria)
 
