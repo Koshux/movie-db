@@ -11,7 +11,7 @@ export const moviesApi = createApi({
       query: (genre) => '/movies',
     }),
     getGenres: builder.query<Genre[], void>({
-      query: () => '/movies/genres'
+      query: () => '/movies?include=genres'
     }),
   }),
 })

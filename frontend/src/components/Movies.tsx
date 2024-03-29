@@ -24,7 +24,7 @@ const Movies = () => {
       <ul>
         {movies?.map((movie: Movie)  => (
           <li key={movie.id}>
-            {movie.attributes.title} - {movie.attributes.year}
+            {movie.title} - {movie.release_date}
           </li>
         ))}
       </ul>

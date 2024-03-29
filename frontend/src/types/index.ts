@@ -1,22 +1,22 @@
 
 export interface Movie {
   id: number,
-  attributes: {
-    title: string
-    genre: string
-    year: string
-    // rating: number
-    // director: string
-    // actors: string
-    // plot: string
-    // poster: string
-  }
+  title: string,
+  vote_count: number,
+  video: boolean,
+  vote_average: number,
+  popularity: number,
+  poster_path: string,
+  original_language: string,
+  original_title: string,
+  backdrop_path: string,
+  adult: boolean,
+  overview: string,
+  release_date: string,
 }
 
 export interface Genre {
   id: number
-  attributes: {
-    name: string
-  }
+  name: string
 }
 
