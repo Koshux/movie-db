@@ -1,22 +1,42 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { Movie, Genre } from '../../types'
+import { Movie } from '../../types'
 
-export const moviesApi = createApi({
+export const moviesApi: any = createApi({
   reducerPath: 'moviesApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:4000/api'
   }),
   endpoints: (builder) => ({
     getMovies: builder.query<Movie[], string | void>({
-      query: (genre) => '/movies',
+      query: (searchCriteria = '') => {
+        const params = new URLSearchParams()
+        const criteria = searchCriteria || ''
+        const [genreId, searchTerm] = criteria.split(',')
+
+        if (genreId && genreId !== 'all') {
+          params.append('genre', genreId)
+        }
+        if (searchTerm) {
+          params.append('search', searchTerm)
+        }
+
+        const queryString = params.toString()
+        return `/movies?${queryString ? `${queryString}` : ''}`
+      },
     }),
-    getGenres: builder.query<Genre[], void>({
-      query: () => '/movies/genres'
+    getMostPopularMovies: builder.query<Movie[], void>({
+      query: () => '/movies?sort=popularity.desc&limit=10'
     }),
-  }),
+    getMoviesByGenre: builder.query<Movie[], string | void>({
+      query: (genreId = '') => {
+        return `/movies?genre=${genreId}&limit=10`
+      },
+    }),
+  })
 })
 
 export const {
   useGetMoviesQuery,
-  useGetGenresQuery,
+  useGetMostPopularMoviesQuery,
+  useGetMoviesByGenreQuery,
 } = moviesApi

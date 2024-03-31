@@ -6,29 +6,55 @@ module.exports = {
     await queryInterface.createTable('Movies', {
       id: {
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: false, // Since we are using TMDb's movie ID, it's not auto-incrementing
         primaryKey: true,
         type: Sequelize.INTEGER
       },
       title: {
-        allowNull: false,
         type: Sequelize.STRING
       },
-      genre: {
-        allowNull: false,
+      vote_count: {
+        type: Sequelize.INTEGER
+      },
+      video: {
+        type: Sequelize.BOOLEAN
+      },
+      vote_average: {
+        type: Sequelize.FLOAT
+      },
+      popularity: {
+        type: Sequelize.FLOAT
+      },
+      poster_path: {
         type: Sequelize.STRING
       },
-      year: {
-        allowNull: false,
+      original_language: {
         type: Sequelize.STRING
+      },
+      original_title: {
+        type: Sequelize.STRING
+      },
+      backdrop_path: {
+        type: Sequelize.STRING
+      },
+      adult: {
+        type: Sequelize.BOOLEAN
+      },
+      overview: {
+        type: Sequelize.TEXT
+      },
+      release_date: {
+        type: Sequelize.DATEONLY // Use DATEONLY for just the date without time
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
     })
   },

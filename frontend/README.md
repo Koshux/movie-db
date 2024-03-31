@@ -1,46 +1,88 @@
-# Getting Started with Create React App
+# Movie Library Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+This is the frontend for the Movie Library application, built with React and Chakra UI. It's designed to interface with the Movie Library API, allowing users to browse, search, and filter movies by genre. The application is responsive, ensuring a smooth user experience across various devices.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Display movies in a carousel and grid layout
+- Search for movies by title
+- Filter movies by genre
+- Responsive design for mobile, tablet, and desktop
+- Integration with the backend Movie Library API
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+- Node.js (version 12 or later)
+- npm or yarn
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `npm run build`
+1. Clone the repository:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone <repository-url>
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Navigate to the frontend directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+cd movie-library-frontend
+```
 
-### `npm run eject`
+3. Install dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+npm install
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Run the application:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+   This will launch the app in development mode, accessible at `http://localhost:3000`.
 
-## Learn More
+### Environment Variables
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Before starting the app, you may need to set up environment variables for API endpoints or other configuration settings. Create a `.env` file in the root of your frontend directory and specify your API base URL:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+REACT_APP_API_BASE_URL=http://localhost:4000/api
+```
+
+Adjust the port number as necessary to match your backend configuration.
+
+## Deployment
+
+This application is set up for easy deployment to GitHub Pages. To deploy:
+
+1. Build the static files:
+
+   ```
+   npm run build
+   ```
+
+2. Deploy to GitHub Pages:
+
+   ```
+   npm run deploy
+   ```
+
+## Future Enhancements
+
+- Implement user authentication and personal watchlists.
+- Add movie ratings and reviews feature.
+- Improve accessibility and internationalization support.
+
+## Contributing
+
+We welcome contributions to improve this project. Please feel free to submit issues or pull requests with your suggestions or improvements.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
