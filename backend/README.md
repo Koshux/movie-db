@@ -38,6 +38,9 @@ npm install
 3. Set up environment variables:
 
    Copy `.env.example` to `.env` and fill in the necessary details like database connection and TMDb API key.
+   - DB_PATH=<path/to/SQLite/database/file.sqlite3>
+   - MOVIE_DB_API_KEY=<themoviedb.org API key>
+   - MOVIE_DB_API_READ_ACCESS_TOKEN=<themoviedb.org API read access token>
 
 
 ## Running the app
