@@ -2,16 +2,24 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { MoviesService } from './movies.service'
 import { CreateMovieDto } from './dto/create-movie.dto'
 import { UpdateMovieDto } from './dto/update-movie.dto'
+import { TmdbService } from 'src/tmdb/tmdb.service'
 
 @Controller('movies')
 export class MoviesController {
-  constructor(private readonly moviesService: MoviesService) {}
+  constructor(
+    private readonly moviesService: MoviesService,
+    private tmdbService: TmdbService
+  ) {}
 
   @Post()
   create(@Body() createMovieDto: CreateMovieDto) {
     return this.moviesService.create(createMovieDto)
   }
 
+  @Get('popular')
+  getPopularMovies() {
+    return this.tmdbService.getPopularMovies()
+  }
   @Get()
   findAll(
     @Query('search') search: string,
