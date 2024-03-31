@@ -8,7 +8,21 @@ export const moviesApi: any = createApi({
   }),
   endpoints: (builder) => ({
     getMovies: builder.query<Movie[], string | void>({
-      query: () => '/movies',
+      query: (searchCriteria = '') => {
+        const params = new URLSearchParams()
+        const criteria = searchCriteria || ''
+        const [genreId, searchTerm] = criteria.split(',')
+
+        if (genreId && genreId !== 'all') {
+          params.append('genre', genreId)
+        }
+        if (searchTerm) {
+          params.append('search', searchTerm)
+        }
+
+        const queryString = params.toString()
+        return `/movies?${queryString ? `${queryString}` : ''}`
+      },
     }),
     getMostPopularMovies: builder.query<Movie[], void>({
       query: () => '/movies?include=genres'

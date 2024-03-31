@@ -1,5 +1,6 @@
 import { Badge, Box, Image, Text, useColorModeValue } from "@chakra-ui/react"
 import { Movie } from "../../types"
+import MovieImage from "./MovieImage";
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
   const bgColor = useColorModeValue('white', 'gray.800');
@@ -7,7 +8,12 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
 
   return (
     <Box
-      p="5"
+      padding="4"
+      // width={{
+      //   base: '100%',
+      //   md: '50%',
+      //   lg: '25%',
+      // }}
       // maxW="320px"
       borderWidth="1px"
       borderRadius="lg"
@@ -21,6 +27,10 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
         boxShadow: "lg",
       }}
     >
+      <MovieImage
+        src={movie.poster_path}
+        // alt={`Poster of ${movie.title}`}
+      />
       <Image
         src={movie.poster_path}
         alt={`Poster of ${movie.title}`}
@@ -28,8 +38,24 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
         // h="200px"
         // w="full"
       />
-      <Box p="6">
-        <Box display="flex" alignItems="baseline">
+      <Box
+        // padding="4"
+        // width={{
+        //   base: '100%',
+        //   md: '50%',
+        //   lg: '25%',
+        // }}
+      >
+        <Box
+          display="flex"
+          alignItems="baseline"
+          // padding="4"
+          // width={{
+          //   base: '100%',
+          //   md: '50%',
+          //   lg: '25%',
+          // }}
+        >
           <Badge borderRadius="full" px="2" colorScheme="teal">
             New
           </Badge>
@@ -39,6 +65,12 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
             as="h4"
             lineHeight="tight"
             isTruncated
+            // padding="4"
+            // width={{
+            //   base: '100%',
+            //   md: '50%',
+            //   lg: '25%',
+            // }}
           >
             {movie.title}
           </Box>
@@ -50,6 +82,12 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
           as="h4"
           lineHeight="tight"
           isTruncated
+          // padding="4"
+          // width={{
+          //   base: '100%',
+          //   md: '50%',
+          //   lg: '25%',
+          // }}
         >
           Rating: {movie.vote_average} / 10
         </Box>

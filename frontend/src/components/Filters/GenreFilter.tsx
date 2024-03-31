@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Genre } from '../../types'
 import { useGetGenresQuery } from '../../features/genres/genresApi'
-import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
+import { Button, Menu, MenuButton, MenuItem, MenuList, Skeleton } from '@chakra-ui/react'
 import { FaChevronDown } from 'react-icons/fa'
 
 interface Props {
@@ -9,25 +9,31 @@ interface Props {
   selectedGenre: string
 }
 
-const GenreFilter: React.FC<Props> = ({ onGenreSelect, selectedGenre }) => {
+const GenreFilter: React.FC<Props> = ({ onGenreSelect }) => {
   const [query, setQuery] = useState('')
+  const [genreName, setGenreName] = useState('All genres')
   const searchCriteria = `${query}`
   const { data: genres, error, isLoading } = useGetGenresQuery(searchCriteria)
 
-  if (isLoading) return <div>Loading...</div>
+  const handleGenreSelect = (genreId: string, genreName: string) => {
+    setGenreName(genreName)
+    onGenreSelect(genreId)
+  }
+
+  if (isLoading) return <Skeleton><div>Loading...</div></Skeleton>
   if (error) return <div>Error: {error.toString()}</div>
 
   return (
     <Menu isLazy>
       <MenuButton as={Button} rightIcon={<FaChevronDown />}>
-        {selectedGenre ? selectedGenre : 'All genres'}
+        {genreName}
       </MenuButton>
       <MenuList>
-        <MenuItem onClick={() => onGenreSelect('all')}>All genres</MenuItem>
+        <MenuItem onClick={() => handleGenreSelect('all', 'All genres')}>All genres</MenuItem>
         {genres?.map((genre: Genre) => (
           <MenuItem
             key={genre.id}
-            onClick={() => onGenreSelect(genre.id.toString())}
+            onClick={() => handleGenreSelect(genre.id.toString(), genre.name)}
           >
             {genre.name}
           </MenuItem>

@@ -23,10 +23,13 @@ const theme = extendTheme({
         borderRadius: 'full', // Rounded buttons
         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.15)', // Soft shadow for depth
         transition: 'all 0.2s ease-in-out', // Smooth transition for interaction states
+        _hover: { textDecoration: 'none' }, // Remove underline on hover
+        _focus: { boxShadow: 'outline'  },
       },
       variants: {
         solid: (props: { colorMode: string }) => ({
           bg: props.colorMode === 'dark' ? 'primary.600' : 'primary.500',
+          boxShadow: 'md',
           color: 'white',
           _hover: {
             bg: props.colorMode === 'dark' ? 'primary.500' : 'primary.600',
@@ -76,6 +79,23 @@ const theme = extendTheme({
       },
       // Adjust other heading sizes as needed
     }),
+    '.chakra-icon': {
+      color: 'primary.500',
+    },
+    '.chakra-badge': {
+      variant: 'subtle',
+      colorScheme: 'yellow',
+    },
+    '.chakra-input': {
+      borderColor: 'gray.300',
+      _hover: {
+        borderColor: 'gray.400',
+      },
+      _focus: {
+        borderColor: 'primary.500',
+        boxShadow: '0 0 0 1px var(--chakra-colors-primary-500)',
+      },
+    }
   },
 })
 

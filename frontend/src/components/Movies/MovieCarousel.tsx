@@ -25,7 +25,16 @@ const MovieCarousel = ({ categoryName, movies }: { categoryName: string, movies:
   }
 
   return (
-    <Box my={5} position="relative">
+    <Box
+      my={5}
+      position="relative"
+      // padding="4"
+      // width={{
+      //   base: '100%',
+      //   md: '50%',
+      //   lg: '25%',
+      // }}
+    >
       <Heading size="md" mb={3}>{categoryName}</Heading>
       <IconButton
         aria-label="Scroll left"
@@ -49,6 +58,12 @@ const MovieCarousel = ({ categoryName, movies }: { categoryName: string, movies:
             // display="inline-block"
             // minWidth="220px"
             mr="0.5"
+            // padding="4"
+            // width={{
+            //   base: '100%',
+            //   md: '50%',
+            //   lg: '25%',
+            // }}
           >
             <MovieCard key={movie.id} movie={movie} />
           </Box>
