@@ -25,7 +25,8 @@ export const moviesApi: any = createApi({
       },
     }),
     getMostPopularMovies: builder.query<Movie[], void>({
-      query: () => '/movies?sort=popularity.desc&limit=10'
+      query: () => '/movies/popular',
+      transformResponse: (response: { results: Movie[] }) => response.results
     }),
     getMoviesByGenre: builder.query<Movie[], string | void>({
       query: (genreId = '') => {

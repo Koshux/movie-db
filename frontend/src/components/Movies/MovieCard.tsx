@@ -1,20 +1,17 @@
 import { Badge, Box, Image, Text, useColorModeValue } from "@chakra-ui/react"
 import { Movie } from "../../types"
 import MovieImage from "./MovieImage";
+const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/'
+const POSTER_SIZE = 'w500'
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
   const bgColor = useColorModeValue('white', 'gray.800');
   const textColor = useColorModeValue('gray.700', 'white');
+  const posterUrl = `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
 
   return (
     <Box
       padding="4"
-      // width={{
-      //   base: '100%',
-      //   md: '50%',
-      //   lg: '25%',
-      // }}
-      // maxW="320px"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
@@ -27,35 +24,14 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
         boxShadow: "lg",
       }}
     >
-      <MovieImage
-        src={movie.poster_path}
-        // alt={`Poster of ${movie.title}`}
-      />
+      <MovieImage src={movie.poster_path} />
       <Image
-        src={movie.poster_path}
+        src={posterUrl}
         alt={`Poster of ${movie.title}`}
         borderRadius="md"
-        // h="200px"
-        // w="full"
       />
-      <Box
-        // padding="4"
-        // width={{
-        //   base: '100%',
-        //   md: '50%',
-        //   lg: '25%',
-        // }}
-      >
-        <Box
-          display="flex"
-          alignItems="baseline"
-          // padding="4"
-          // width={{
-          //   base: '100%',
-          //   md: '50%',
-          //   lg: '25%',
-          // }}
-        >
+      <Box>
+        <Box display="flex" alignItems="baseline">
           <Badge borderRadius="full" px="2" colorScheme="teal">
             New
           </Badge>

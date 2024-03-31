@@ -13,6 +13,7 @@ export interface Movie {
   adult: boolean,
   overview: string,
   release_date: string,
+  genreIds?: number[],
 }
 
 export interface Genre {
