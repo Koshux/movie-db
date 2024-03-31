@@ -25,21 +25,11 @@ export const moviesApi: any = createApi({
       },
     }),
     getMostPopularMovies: builder.query<Movie[], void>({
-      query: () => '/movies?include=genres'
+      query: () => '/movies?sort=popularity.desc&limit=10'
     }),
-    getMoviesByCategory: builder.query<Movie[], { category: string, filter?: string, genre?: string }>({
-      query: ({ category, filter, genre }) => {
-        let queryParams = `category=${category}`
-
-        if (filter) {
-          queryParams += `&filter=${filter}`
-        }
-
-        if (genre) {
-          queryParams += `&genre=${genre}`
-        }
-
-        return `/movies?${queryParams}`
+    getMoviesByGenre: builder.query<Movie[], string | void>({
+      query: (genreId = '') => {
+        return `/movies?genre=${genreId}&limit=10`
       },
     }),
   })
@@ -48,5 +38,5 @@ export const moviesApi: any = createApi({
 export const {
   useGetMoviesQuery,
   useGetMostPopularMoviesQuery,
-  useGetMoviesByCategoryQuery,
+  useGetMoviesByGenreQuery,
 } = moviesApi

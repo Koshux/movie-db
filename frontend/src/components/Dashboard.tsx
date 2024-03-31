@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import Search from './Filters/Search'
 import GenreFilter from './Filters/GenreFilter'
-import { useGetMoviesQuery } from '../features/movies/moviesApi'
+import { useGetMoviesByGenreQuery, useGetMostPopularMoviesQuery, useGetMoviesQuery } from '../features/movies/moviesApi'
 import MovieCarousel from './Movies/MovieCarousel'
 import MovieFilteredResults from './Movies/MovieFilteredResulst'
 import { Box, Heading, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
+import MovieSkeleton from './Movies/MovieSkeleton'
 
 const Dashboard = () => {
   const [isFiltered, setIsFiltered] = useState<boolean>(false)
@@ -12,6 +13,21 @@ const Dashboard = () => {
   const [selectedGenre, setSelectedGenre] = useState<string>('all')
   const searchCriteria = `${selectedGenre},${searchTerm}`
   const { data: movies, error, isLoading } = useGetMoviesQuery(searchCriteria)
+  const {
+    data: mostPopularMovies,
+    error: mostPopularMoviesError,
+    isLoading: mostPopularIsLoading,
+  } = useGetMostPopularMoviesQuery()
+  const {
+    data: actionMovies,
+    error: actionMoviesError,
+    isLoading: actionMoviesIsLoading,
+  } = useGetMoviesByGenreQuery('28')
+  const {
+    data: comedyMovies,
+    error: comedyMoviesError,
+    isLoading: comedyMoviesIsLoading,
+  } = useGetMoviesByGenreQuery('35')
 
   useEffect(() => {
     setIsFiltered(selectedGenre !== 'all' || searchTerm !== '')
@@ -27,33 +43,8 @@ const Dashboard = () => {
     setIsFiltered(query !== '' || selectedGenre !== 'all')
   }
 
-  if (isLoading) {
-    return (
-      <Box
-        padding='4'
-        boxShadow='lg'
-        bg='white'
-        width={{
-          base: '100%',
-          md: '50%',
-          lg: '25%',
-        }}
-      >
-        <SkeletonCircle size='10' />
-        <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
-      </Box>
-    )
-  }
-
-  if (error) {
-    return <div>Error: {error.toString()}</div>
-  }
-
-  // const categories = [
-  //   { id: 'most-popular', name: 'Most Popular'},
-  //   { id: 'comedy', name: 'Comedy'},
-  //   { id: 'thriller', name: 'Thriller'},
-  // ]
+  if (isLoading) return <MovieSkeleton />
+  if (error) return <div>Error: {error.toString()}</div>
 
   return (
     <div>
@@ -66,7 +57,13 @@ const Dashboard = () => {
       {
         isFiltered
           ? (<MovieFilteredResults movies={movies} />)
-          : (<MovieCarousel categoryName="Most Popular" movies={movies} />)
+          : (
+            <>
+              {mostPopularIsLoading ? <MovieSkeleton /> : (<MovieCarousel title='Most Popular' movies={mostPopularMovies} />)}
+              {actionMoviesIsLoading ? <MovieSkeleton /> : (<MovieCarousel title='Action' movies={actionMovies} />)}
+              {comedyMoviesIsLoading ? <MovieSkeleton /> :(<MovieCarousel title='Comedy' movies={comedyMovies} />)}
+            </>
+          )
       }
     </div>
   )

@@ -5,7 +5,7 @@ import MovieCard from "./MovieCard";
 import { useRef } from "react";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 
-const MovieCarousel = ({ categoryName, movies }: { categoryName: string, movies: Movie[] }) => {
+const MovieCarousel = ({ title, movies = [] }: { title: string, movies: Movie[] }) => {
   const MotionBox = motion(Box)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
@@ -35,7 +35,7 @@ const MovieCarousel = ({ categoryName, movies }: { categoryName: string, movies:
       //   lg: '25%',
       // }}
     >
-      <Heading size="md" mb={3}>{categoryName}</Heading>
+      <Heading size="md" mb={3}>{title}</Heading>
       <IconButton
         aria-label="Scroll left"
         icon={<FaArrowAltCircleLeft />}
