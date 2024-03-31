@@ -4,13 +4,11 @@ import { ModelCtor } from 'sequelize-typescript'
 import Genre from 'src/models/genre.model'
 import Movie from 'src/models/movie.model'
 import { MovieGenre } from 'src/models/movie-genre.model'
+import { Op } from 'sequelize'
 
 export interface QueryParams {
-  filter?: string
-  include?: string
-  page?: string
-  limit?: string
-  sort?: string
+  search?: string
+  genre?: string
 }
 
 export interface SequelizeOptions {
@@ -25,54 +23,37 @@ export interface SequelizeOptions {
 export class SequelizeQueryUtil {
   parseQueryParams(query: QueryParams): SequelizeOptions {
     const options: any = {
-      where: this.parseFilter(query.filter),
-      include: this.parseInclude(query.include),
-      ...this.parsePagination(query.page, query.limit),
-      order: this.parseSort(query.sort),
+      where: this.parseFilter(query.search),
+      include: this.parseInclude(query.genre),
     }
 
     return options
   }
 
-  private parseFilter(filter?: string) {
-    if (!filter) return {}
-    try {
-      return JSON.parse(filter)
-    } catch (error) {
-      return {}
-    }
-  }
+  private parseFilter(search?: string) {
+    if (!search) return {}
 
-  private parseInclude(include?: string) {
-    if (!include) return []
+    const where = {}
 
-    const modelMapping: { [key: string]: ModelCtor<any> } = {
-      'genre': Genre,
-      'movie-genre': MovieGenre,
-      'movie': Movie,
+    if (search) {
+      where['title'] = { [Op.like]: `%${search}%` }
     }
 
-    return include.split(',').map(relation => {
-      const model = modelMapping[relation]
-
-      return model ? { model, through: { attributes: [] } } : null
-    }).filter(include => include !== null)
+    return where
   }
 
-  private parsePagination(page?: string, limit?: string) {
-    const paginationOptions: Partial<SequelizeOptions> = {}
-    if (page && limit) {
-      paginationOptions['offset'] = (parseInt(page, 10) - 1) * parseInt(limit, 10)
-      paginationOptions['limit'] = parseInt(limit, 10)
+  private parseInclude(genreId?: string) {
+    if (!genreId) return []
+
+    if (genreId && genreId !== 'all') {
+      return [
+        {
+          model: Genre,
+          where: { id: genreId },
+          through: { attributes: [] },
+          required: true,
+        },
+      ]
     }
-    return paginationOptions
-  }
-
-  private parseSort(sort?: string) {
-    if (!sort) return []
-
-    return sort.split(',').map(s => {
-      return s.startsWith('-') ? [s.substring(1), 'DESC'] : [s, 'ASC']
-    })
   }
 }

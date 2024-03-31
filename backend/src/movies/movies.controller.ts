@@ -14,18 +14,14 @@ export class MoviesController {
 
   @Get()
   findAll(
-    @Query('page') page: string,
-    @Query('limit') limit: string,
-    @Query('filter') filter: string,
-    @Query('sort') sort: string,
-    @Query('include') include: string,
+    @Query('search') search: string,
+    @Query('genre') genre: string,
   ) {
+    console.log('search', search)
+    console.log('genre', genre)
     return this.moviesService.findAll({
-      page,
-      limit,
-      filter,
-      sort,
-      include,
+      search,
+      genre,
     })
   }
 

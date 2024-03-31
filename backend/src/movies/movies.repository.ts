@@ -17,6 +17,7 @@ export class MoviesRepository {
   }
 
   async findAll(options: SequelizeOptions): Promise<Movie[]> {
+    console.log('options', options)
     return this.movieModel.findAll(options)
   }
 
