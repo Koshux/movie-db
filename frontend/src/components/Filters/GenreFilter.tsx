@@ -10,10 +10,8 @@ interface Props {
 }
 
 const GenreFilter: React.FC<Props> = ({ onGenreSelect }) => {
-  const [query, setQuery] = useState('')
   const [genreName, setGenreName] = useState('All genres')
-  const searchCriteria = `${query}`
-  const { data: genres, error, isLoading } = useGetGenresQuery(searchCriteria)
+  const { data: genres, error, isLoading } = useGetGenresQuery()
 
   const handleGenreSelect = (genreId: string, genreName: string) => {
     setGenreName(genreName)
@@ -28,7 +26,7 @@ const GenreFilter: React.FC<Props> = ({ onGenreSelect }) => {
       <MenuButton as={Button} rightIcon={<FaChevronDown />}>
         {genreName}
       </MenuButton>
-      <MenuList>
+      <MenuList maxH="300px" overflowY="auto">
         <MenuItem onClick={() => handleGenreSelect('all', 'All genres')}>All genres</MenuItem>
         {genres?.map((genre: Genre) => (
           <MenuItem

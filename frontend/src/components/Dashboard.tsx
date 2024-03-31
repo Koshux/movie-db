@@ -9,7 +9,7 @@ import { Box, Heading, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
 const Dashboard = () => {
   const [isFiltered, setIsFiltered] = useState<boolean>(false)
   const [searchTerm, setSearchTerm] = useState<string>('')
-  const [selectedGenre, setSelectedGenre] = useState<string>('')
+  const [selectedGenre, setSelectedGenre] = useState<string>('all')
   const searchCriteria = `${selectedGenre},${searchTerm}`
   const { data: movies, error, isLoading } = useGetMoviesQuery(searchCriteria)
 
