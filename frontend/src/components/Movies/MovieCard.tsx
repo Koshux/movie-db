@@ -1,5 +1,5 @@
 import { Badge, Box, Image, Text, useColorModeValue } from "@chakra-ui/react"
-import { Movie } from "../types"
+import { Movie } from "../../types"
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
   const bgColor = useColorModeValue('white', 'gray.800');
@@ -8,13 +8,18 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
   return (
     <Box
       p="5"
-      maxW="320px"
+      // maxW="320px"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
       bg={bgColor}
       color={textColor}
-      boxShadow="lg"
+      boxShadow="base"
+      transition="transform 0.2s, box-shadow 0.2s"
+      _hover={{
+        transform: "scale(1.05)",
+        boxShadow: "lg",
+      }}
     >
       <Image
         src={movie.poster_path}

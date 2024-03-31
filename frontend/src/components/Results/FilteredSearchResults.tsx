@@ -1,24 +1,25 @@
 import { Box, SimpleGrid, Text } from "@chakra-ui/react"
-import { Movie } from "../types"
+import { Movie } from "../../types"
+import MovieCard from "../Movies/MovieCard"
 
 const FilteredSearchResults = ({ movies }: { movies: Movie[]}) => {
   return (
     <>
       <Text fontSize="lg" mb={4}>Found {movies.length} results</Text>
-      <SimpleGrid columns={{ base: 2, md: 4 }} spacing={5}>
+      <SimpleGrid columns={{ base: 2, md: 4 }} spacing={1}>
         {movies.map((movie: Movie) => (
           <Box
             key={movie.id}
-            p={5}
-            shadow="md"
-            borderWidth="1px"
+            // display="inline-block"
+            // minWidth="220px"
+            mr="0.5"
           >
-            <Text mt={2}>
-              {movie.title}
-            </Text>
+            <MovieCard key={movie.id} movie={movie} />
           </Box>
         ))}
       </SimpleGrid>
     </>
   )
 }
+
+export default FilteredSearchResults
