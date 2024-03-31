@@ -16,12 +16,18 @@ export class MoviesController {
   findAll(
     @Query('search') search: string,
     @Query('genre') genre: string,
+    @Query('limit') limit: string,
+    @Query('sort') sort: string,
   ) {
     console.log('search', search)
     console.log('genre', genre)
+    const limitNumber = limit ? parseInt(limit, 10) : 10
+
     return this.moviesService.findAll({
       search,
       genre,
+      limit: limitNumber,
+      sort
     })
   }
 

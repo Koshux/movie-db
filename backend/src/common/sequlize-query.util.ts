@@ -9,6 +9,8 @@ import { Op } from 'sequelize'
 export interface QueryParams {
   search?: string
   genre?: string
+  limit: number
+  sort?: string
 }
 
 export interface SequelizeOptions {
@@ -25,6 +27,7 @@ export class SequelizeQueryUtil {
     const options: any = {
       where: this.parseFilter(query.search),
       include: this.parseInclude(query.genre),
+      order: this.parseOrder(query.sort),
     }
 
     return options
@@ -55,5 +58,21 @@ export class SequelizeQueryUtil {
         },
       ]
     }
+
+    return []
+  }
+
+  private parseOrder(sort?: string): any[] {
+    if (!sort) return []
+
+    if (sort === 'popularity.desc') {
+      return [['popularity', 'DESC']]
+    }
+
+    if (sort === 'vote_average.desc') {
+      return [['vote_average', 'DESC']]
+    }
+
+    return []
   }
 }
