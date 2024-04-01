@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Search from './Filters/Search'
 import GenreFilter from './Filters/GenreFilter'
-import { useGetMoviesByGenreQuery, useGetMostPopularMoviesQuery, useGetMoviesQuery } from '../features/movies/moviesApi'
+import { useGetMoviesByGenreTmdbQuery, useGetMostPopularMoviesQuery, useGetMoviesQuery, useGetMoviesByGenreQuery } from '../features/movies/moviesApi'
 import MovieCarousel from './Movies/MovieCarousel'
 import MovieFilteredResults from './Movies/MovieFilteredResulst'
 import { Box, Heading, SkeletonCircle, SkeletonText } from '@chakra-ui/react'

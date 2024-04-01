@@ -14,10 +14,13 @@ This document serves as a reflection on the development of the Movie Library app
 ## Challenges Encountered
 
 - **Backend Integration**: Setting up the API without NestJS was relatively straight forward but I preferred to try out NestJS. Migrating was relatively smooth but it required some additional learning around relationship retrieval. As it stands, it could be improved with more complex queries.
+- **State Management**: While Redux Toolkit simplified state management, understanding the concepts and best practices required some time and effort. I had to learn about creating slices, reducers, and actions to manage the app's state effectively.
 - **Responsive Design**: While Chakra UI greatly facilitated responsive design, fine-tuning the UI for an optimal user experience across devices required meticulous adjustments.
 
 ## Areas for Improvement
 
+- **Better Migrations**: The current migration setup is basic and could be improved to store images.
+- **Deploy API**: The API is currently running locally and could be deployed to a cloud provider like Heroku.
 - **Accessibility and Internationalization**: Making the app more accessible to users with disabilities and supporting multiple languages can broaden the app's user base.
 - **Error Handling and Feedback**: Enhancing error handling and providing meaningful feedback to users can improve the app's usability and user satisfaction.
 - **User Experience Enhancements**: Implementing features like infinite scrolling, lazy loading, and pagination can enhance the user experience and reduce load times.

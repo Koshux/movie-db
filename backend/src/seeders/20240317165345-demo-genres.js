@@ -1,39 +1,37 @@
-'use strict';
-
+'use strict'
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
     const genres = [
       { id: 28, name: 'Action' },
-      { id: 12, name: 'Abenteuer' },
+      { id: 12, name: 'Adventure' },
       { id: 16, name: 'Animation' },
-      { id: 35, name: 'Komödie' },
-      { id: 80, name: 'Krimi' },
-      { id: 99, name: 'Dokumentarfilm' },
+      { id: 35, name: 'Comedy' },
+      { id: 80, name: 'Crime' },
+      { id: 99, name: 'Documentary' },
       { id: 18, name: 'Drama' },
-      { id: 10751, name: 'Familie' },
+      { id: 10751, name: 'Family' },
       { id: 14, name: 'Fantasy' },
-      { id: 36, name: 'Historie' },
+      { id: 36, name: 'History' },
       { id: 27, name: 'Horror' },
-      { id: 10402, name: 'Musik' },
+      { id: 10402, name: 'Music' },
       { id: 9648, name: 'Mystery' },
-      { id: 10749, name: 'Liebesfilm' },
+      { id: 10749, name: 'Romance' },
       { id: 878, name: 'Science Fiction' },
-      { id: 10770, name: 'TV-Film' },
+      { id: 10770, name: 'TV Movie' },
       { id: 53, name: 'Thriller' },
-      { id: 10752, name: 'Kriegsfilm' },
+      { id: 10752, name: 'War' },
       { id: 37, name: 'Western' }
-    ]
+    ];
 
     await queryInterface.bulkInsert('Genres', genres.map(genre => ({
-      id: genre.id,
-      name: genre.name,
+      ...genre,
       createdAt: new Date(),
       updatedAt: new Date()
-    })), {})
+    })), {});
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Genres', null, {})
+    await queryInterface.bulkDelete('Genres', null, {});
   }
-};
+}

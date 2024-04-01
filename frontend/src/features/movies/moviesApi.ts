@@ -25,12 +25,19 @@ export const moviesApi: any = createApi({
       },
     }),
     getMostPopularMovies: builder.query<Movie[], void>({
-      query: () => '/movies?sort=popularity.desc&limit=10'
+      query: () => '/movies/popular',
+      transformResponse: (response: { results: Movie[] }) => response.results
     }),
     getMoviesByGenre: builder.query<Movie[], string | void>({
       query: (genreId = '') => {
         return `/movies?genre=${genreId}&limit=10`
       },
+    }),
+    getMoviesByGenreTmdb: builder.query<Movie[], string | void>({
+      query: (genreId = '') => {
+        return `/movies/genre/${genreId}`
+      },
+      transformResponse: (response: { results: Movie[] }) => response.results
     }),
   })
 })
@@ -39,4 +46,5 @@ export const {
   useGetMoviesQuery,
   useGetMostPopularMoviesQuery,
   useGetMoviesByGenreQuery,
+  useGetMoviesByGenreTmdbQuery,
 } = moviesApi
