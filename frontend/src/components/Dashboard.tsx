@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Search from './Filters/Search'
 import GenreFilter from './Filters/GenreFilter'
-import { useGetMoviesByGenreQuery, useGetMostPopularMoviesQuery, useGetMoviesQuery } from '../features/movies/moviesApi'
+import { useGetMoviesByGenreTmdbQuery, useGetMostPopularMoviesQuery, useGetMoviesQuery } from '../features/movies/moviesApi'
 import MovieCarousel from './Movies/MovieCarousel'
 import MovieFilteredResults from './Movies/MovieFilteredResulst'
 import { Box, Heading, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
@@ -22,12 +22,12 @@ const Dashboard = () => {
     data: actionMovies,
     error: actionMoviesError,
     isLoading: actionMoviesIsLoading,
-  } = useGetMoviesByGenreQuery('28')
+  } = useGetMoviesByGenreTmdbQuery('28')
   const {
     data: comedyMovies,
     error: comedyMoviesError,
     isLoading: comedyMoviesIsLoading,
-  } = useGetMoviesByGenreQuery('35')
+  } = useGetMoviesByGenreTmdbQuery('35')
 
   useEffect(() => {
     setIsFiltered(selectedGenre !== 'all' || searchTerm !== '')

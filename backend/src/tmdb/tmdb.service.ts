@@ -12,4 +12,9 @@ export class TmdbService {
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_API_KEY}`
     return this.httpService.get(url).pipe(map(response => response.data))
   }
+
+  getMoviesByGenre(genreIds: string) {
+    const url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_API_KEY}&with_genres=${genreIds}`
+    return this.httpService.get(url).pipe(map(response => response.data))
+  }
 }

@@ -33,6 +33,12 @@ export const moviesApi: any = createApi({
         return `/movies?genre=${genreId}&limit=10`
       },
     }),
+    getMoviesByGenreTmdb: builder.query<Movie[], string | void>({
+      query: (genreId = '') => {
+        return `/movies/genre/${genreId}`
+      },
+      transformResponse: (response: { results: Movie[] }) => response.results
+    }),
   })
 })
 
@@ -40,4 +46,5 @@ export const {
   useGetMoviesQuery,
   useGetMostPopularMoviesQuery,
   useGetMoviesByGenreQuery,
+  useGetMoviesByGenreTmdbQuery,
 } = moviesApi

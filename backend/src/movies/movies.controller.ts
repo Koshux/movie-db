@@ -20,6 +20,12 @@ export class MoviesController {
   getPopularMovies() {
     return this.tmdbService.getPopularMovies()
   }
+
+  @Get('genre/:genreIds')
+  getMoviesByGenre(@Param('genreIds') genreIds: string) {
+    return this.tmdbService.getMoviesByGenre(genreIds)
+  }
+
   @Get()
   findAll(
     @Query('search') search: string,
