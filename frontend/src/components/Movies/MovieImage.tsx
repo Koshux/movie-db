@@ -1,22 +1,26 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react"
 
-const MovieImage = ({ src } : { src: string }) => (
+interface MovieImageProps {
+  src: string
+  title: string
+}
+const MovieImage = ({ src, title }: MovieImageProps) => (
   <Box
     position="relative"
     borderRadius="lg"
     overflow="hidden"
-    padding="4"
-    // width={{
-    //   base: '100%',
-    //   md: '50%',
-    //   lg: '25%',
-    // }}
+    backgroundImage={`url(${src})`}
+    backgroundSize="cover"
+    backgroundPosition="center"
+    aria-label={`Poster of ${title}`}
+    height={{
+      base: '300px',
+
+    }}
+    width={{
+      base: '200px',
+    }}
   >
-    <Image
-      src={src}
-      alt="Movie poster"
-      objectFit="cover"
-    />
     <Box
       position="absolute"
       top="0"

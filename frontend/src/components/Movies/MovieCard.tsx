@@ -1,6 +1,7 @@
 import { Badge, Box, Image, Text, useColorModeValue } from "@chakra-ui/react"
 import { Movie } from "../../types"
 import MovieImage from "./MovieImage";
+import MovieDetailsModal from "./MovieDetailsModal";
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/'
 const POSTER_SIZE = 'w500'
 
@@ -11,7 +12,8 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
 
   return (
     <Box
-      padding="4"
+      w="200px"
+      h="300px"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
@@ -24,57 +26,9 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
         boxShadow: "lg",
       }}
     >
-      <MovieImage src={movie.poster_path} />
-      <Image
-        src={posterUrl}
-        alt={`Poster of ${movie.title}`}
-        borderRadius="md"
-      />
-      <Box>
-        <Box display="flex" alignItems="baseline">
-          <Badge borderRadius="full" px="2" colorScheme="teal">
-            New
-          </Badge>
-          <Box
-            ml="2"
-            fontWeight="semibold"
-            as="h4"
-            lineHeight="tight"
-            isTruncated
-            // padding="4"
-            // width={{
-            //   base: '100%',
-            //   md: '50%',
-            //   lg: '25%',
-            // }}
-          >
-            {movie.title}
-          </Box>
-        </Box>
-
-        <Box
-          mt="1"
-          fontWeight="semibold"
-          as="h4"
-          lineHeight="tight"
-          isTruncated
-          // padding="4"
-          // width={{
-          //   base: '100%',
-          //   md: '50%',
-          //   lg: '25%',
-          // }}
-        >
-          Rating: {movie.vote_average} / 10
-        </Box>
-
-        <Text mt={2} fontSize="sm">
-          {movie.overview.length > 150
-            ? `${movie.overview.substring(0, 147)}...`
-            : movie.overview}
-        </Text>
-      </Box>
-      <Text isTruncated>{movie.title}</Text>
+      <MovieDetailsModal movie={movie}>
+        <MovieImage src={posterUrl} title={movie.title} />
+      </MovieDetailsModal>
     </Box>
   )
 }
