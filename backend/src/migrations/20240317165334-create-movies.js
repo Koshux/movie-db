@@ -46,6 +46,9 @@ module.exports = {
       release_date: {
         type: Sequelize.DATEONLY // Use DATEONLY for just the date without time
       },
+      genre_ids: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
